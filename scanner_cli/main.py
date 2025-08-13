@@ -239,15 +239,7 @@ def main(argv=None):
                 ephemeral = False
                 raw_barcode = barcode
                 if triggered_mode:
-                    if triggered_mode.prefix_trigger:
-                        for pref in triggered_mode.prefix_trigger:
-                            if barcode.startswith(pref):
-                                effective_mode = triggered_mode
-                                ephemeral = True
-                                if triggered_mode.strip_prefix:
-                                    barcode = barcode[len(pref):]
-                                break
-                    if not ephemeral and triggered_mode.trigger and barcode in triggered_mode.trigger:
+                    if triggered_mode.trigger and barcode in triggered_mode.trigger:
                         with mode_lock:
                             current_mode = triggered_mode
                             effective_mode = current_mode
@@ -283,6 +275,14 @@ def main(argv=None):
                             log_event("exception", mode=effective_mode.name,
                                       method=effective_mode.method, error=str(e))
                         continue
+                    if triggered_mode.prefix_trigger:
+                        for pref in triggered_mode.prefix_trigger:
+                            if barcode.startswith(pref):
+                                effective_mode = triggered_mode
+                                ephemeral = True
+                                if triggered_mode.strip_prefix:
+                                    barcode = barcode[len(pref):]
+                                break
 
                 payload = {"barcode": barcode,
                            "mode": effective_mode.name, "action": "scan"}
