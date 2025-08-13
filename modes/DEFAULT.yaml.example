@@ -1,0 +1,23 @@
+# SCANNER CLI MODE DEFINITION FILE
+
+name: DEFAULT
+
+# REQUEST SETTINGS
+endpoint: "https://example.com/api/v1/endpoint"
+method: POST
+header:
+  X-Header: example-header
+timeout: 10
+
+# KEYWORD TRIGGER
+trigger:
+  - DEFAULT
+enable_trigger_req: false
+
+# PREFIX TRIGGER
+prefix_trigger:
+  - DEF;
+strip_prefix: false
+
+# ADDITIONAL INPUT
+enable_input: false
