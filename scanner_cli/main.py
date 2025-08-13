@@ -35,6 +35,7 @@ import argparse
 import sys
 import json
 import logging
+import re
 from pathlib import Path
 import threading
 from typing import Dict
@@ -97,6 +98,17 @@ def _eval_mathops(expr: str):
 
 
 console = Console()
+
+
+_ANSI_CSI_RE = re.compile(r"\x1B\[[0-?]*[ -/]*[@-~]")
+
+
+def sanitize_barcode(value: str) -> str:
+    if not value:
+        return value
+    cleaned = _ANSI_CSI_RE.sub("", value)
+    cleaned = cleaned.replace("\x1b", "")
+    return cleaned
 
 
 def parse_args(argv=None):
@@ -218,7 +230,7 @@ def main(argv=None):
                 if line == '':
                     log_event("stdin_eof")
                     break
-                barcode = line.strip()
+                barcode = sanitize_barcode(line.strip())
                 if not barcode:
                     continue
 

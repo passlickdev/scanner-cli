@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "scanner-cli"
-version = "1.0.0"
+version = "1.0.1"
 description = "CLI tool to read barcodes via stdin and route them to REST endpoints based on configurable modes."
 readme = "README.md"
 authors = [{ name = "Passlick Development", email = "hello@passlickdev.com" }]
