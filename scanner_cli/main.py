@@ -163,9 +163,9 @@ def list_modes(modes: Dict[str, Mode]):
 def main(argv=None):
     args = parse_args(argv)
     console.print(
-        f"*** SCANNER CLI v{__version__} ***", style="yellow3", markup=False)
+        f"*** SCANNER CLI v{__version__} ***", style="yellow3", markup=False, highlight=False)
     console.print(
-        "(c) Passlick Development 2025. All rights reserved.\n", style="white")
+        "(c) Passlick Development 2025. All rights reserved.\n", style="white", highlight=False)
     modes_dir = Path(args.modes_dir)
     if not modes_dir.exists():
         console.print(f"[red]Modes directory {modes_dir} does not exist[/red]")
