@@ -303,7 +303,7 @@ def main(argv=None):
                                 evaluated = extra
                         else:
                             evaluated = extra
-                        payload["input"] = sanitize_input(evaluated)
+                        payload["input"] = sanitize_input(str(evaluated))
                         payload["action"] = "scan+input"
 
                 try:
