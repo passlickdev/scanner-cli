@@ -103,7 +103,7 @@ console = Console()
 _ANSI_CSI_RE = re.compile(r"\x1B\[[0-?]*[ -/]*[@-~]")
 
 
-def sanitize_barcode(value: str) -> str:
+def sanitize_input(value: str) -> str:
     if not value:
         return value
     cleaned = _ANSI_CSI_RE.sub("", value)
@@ -230,7 +230,7 @@ def main(argv=None):
                 if line == '':
                     log_event("stdin_eof")
                     break
-                barcode = sanitize_barcode(line.strip())
+                barcode = sanitize_input(line.strip())
                 if not barcode:
                     continue
 
@@ -303,7 +303,7 @@ def main(argv=None):
                                 evaluated = extra
                         else:
                             evaluated = extra
-                        payload["input"] = evaluated
+                        payload["input"] = sanitize_input(evaluated)
                         payload["action"] = "scan+input"
 
                 try:

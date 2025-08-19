@@ -21,3 +21,4 @@ strip_prefix: false
 
 # ADDITIONAL INPUT
 enable_input: false
+eval_mathops: false
